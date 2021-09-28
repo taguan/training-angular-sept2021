@@ -1,22 +1,14 @@
 <div class="container-fluid mt-5">
   <div class="row">
     <div class="col-4 pl-3 scrum-col">
-      <app-card-column [columnName]="'To Do'" [cards]="cardService.todoCards"></app-card-column>
-      <div class="new-card-block">
-        <button class="btn btn-primary btn-block">Add a new card</button>
-        <form>
-          <label for="title" class="form-label">Title</label>
-          <input type="text" name="title" class="form-control" id="title">
-          <label class="form-label">Description</label>
-          <textarea class="form-control" name="description"></textarea>
-        </form>
-      </div>
+      <app-card-column [columnName]="'To Do'" [state]="'to-do'"></app-card-column>
+      <app-new-card-form></app-new-card-form>
     </div>
     <div class="col-4 pl-3 scrum-col">
-      <app-card-column [columnName]="'In Progress'" [cards]="cardService.inProgressCards"></app-card-column>
+      <app-card-column [columnName]="'In Progress'" [state]="'in-progress'"></app-card-column>
     </div>
     <div class="col-4 pl-3 scrum-col">
-      <app-card-column [columnName]="'Done'" [cards]="cardService.doneCards"></app-card-column>
+      <app-card-column [columnName]="'Done'" [state]="'done'"></app-card-column>
     </div>
 
   </div>

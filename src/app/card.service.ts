@@ -1,42 +1,31 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {Card} from './model/card';
+import {ApiService} from './api/api.service';
+import {Observable} from 'rxjs';
+import {map, mergeMap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
 
-  todoCards: Card[] = [
-    {
-      title: 'Card 1',
-      description: 'description of card 1'
-    },
-    {
-      title: 'Card 2',
-      description: 'description of card 1'
-    },
-    {
-      title: 'Card 3',
-      description: 'description of card 1'
-    }
-  ];
+  public newCardEventEmitter = new EventEmitter<Card>();
 
-  inProgressCards: Card[] = [
-    {
-      title: 'Card 4',
-      description: 'description of card 1'
-    }
+  constructor(private apiService: ApiService) { }
 
-  ];
 
-  doneCards: Card[] = [
-    {
-      title: 'Card 5',
-      description: 'description of card 1'
-    }
-  ];
+  getCards(state: Card.StateEnum): Observable<Card[]> {
+    return this.apiService.cardsGet(state);
+  }
 
-  constructor() { }
-
+  createCard(card: Card): Observable<Card> {
+    return this.apiService.cardsPost(card)
+      .pipe(
+        map(card => {
+          this.newCardEventEmitter.emit(card);
+          return card;
+        })
+      );
+  }
 
 }

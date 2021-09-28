@@ -1,0 +1,9 @@
+<div class="new-card-block">
+  <button (click)="createCard()" class="btn btn-primary btn-block" [disabled]="!cardForm.valid">Add a new card</button>
+  <form [formGroup]="cardForm">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" name="title" class="form-control" formControlName="title" id="title">
+    <label class="form-label">Description</label>
+    <textarea class="form-control" name="description" formControlName="description"></textarea>
+  </form>
+</div>
